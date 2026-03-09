@@ -156,9 +156,13 @@ export default function ContactPage() {
             </FadeUp>
             <FadeUp delay={0.3}>
               <div className="flex items-center gap-8 pt-4">
-                {["Instagram", "Facebook", "X"].map((platform) => (
-                  <a key={platform} href="#" className="text-xs uppercase tracking-[0.2em] text-white/40 hover:text-brand-green transition-colors duration-300 font-sans">
-                    {platform}
+                {[
+                  { label: "Instagram", href: "https://www.instagram.com/jacobs_brewhouse/" },
+                  { label: "Facebook", href: "https://facebook.com" },
+                  { label: "X", href: "https://x.com" },
+                ].map((platform) => (
+                  <a key={platform.label} href={platform.href} target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-[0.2em] text-white/40 hover:text-brand-green transition-colors duration-300 font-sans">
+                    {platform.label}
                   </a>
                 ))}
               </div>

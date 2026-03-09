@@ -15,7 +15,7 @@ const navigationLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Instagram", href: "https://www.instagram.com/jacobs_brewhouse/" },
   { label: "Facebook", href: "https://facebook.com" },
   { label: "X (Twitter)", href: "https://x.com" },
 ];
