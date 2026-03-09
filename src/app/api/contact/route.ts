@@ -77,7 +77,7 @@ export async function POST(request: Request) {
     }
 
     const client = new SendMailClient({
-      url: "api.zeptomail.com/",
+      url: "api.zeptomail.in/",
       token,
     });
 
