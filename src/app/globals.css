@@ -460,3 +460,84 @@ img {
     transparent 100%
   );
 }
+
+/* --- Testimonials Section Animations --- */
+@keyframes wordReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes quoteMarkIn {
+  0% { color: rgba(27,94,59,0); transform: translateX(-50%) scale(0.5) rotate(-10deg); }
+  50% { color: rgba(27,94,59,0.08); }
+  100% { color: rgba(27,94,59,0.06); transform: translateX(-50%) scale(1) rotate(0deg); }
+}
+@keyframes glowPulse {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(0.5); }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+}
+@keyframes expandLine {
+  to { width: 60px; }
+}
+@keyframes progressRing {
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- Values Section Animations --- */
+@keyframes float0 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes float1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes ghostFloat0 {
+  0%, 100% { transform: translate(0, -50%); }
+  50% { transform: translate(0, calc(-50% - 15px)); }
+}
+@keyframes ghostFloat1 {
+  0%, 100% { transform: translate(0, -50%); }
+  50% { transform: translate(0, calc(-50% + 12px)); }
+}
+@keyframes ghostFloat2 {
+  0%, 100% { transform: translate(0, -50%); }
+  50% { transform: translate(0, calc(-50% - 10px)); }
+}
+@keyframes shimmerDivider {
+  0%, 100% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+}
+@keyframes shimmerLine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* --- Space Showcase Animations --- */
+@keyframes swingShadow {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  25% { transform: translateX(8px) scaleX(1.1); }
+  75% { transform: translateX(-8px) scaleX(0.9); }
+}
+@keyframes lightSway {
+  0%, 100% { background-position: 0% 0%; opacity: 0.6; }
+  50% { background-position: 100% 100%; opacity: 1; }
+}
+@keyframes plantBreathe {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 0.7; }
+  50% { transform: scale(1.08) translateY(-3px); opacity: 1; }
+}
+@keyframes sunDapple {
+  0%, 100% { transform: translate(0,0) scale(1); opacity: 0.6; }
+  33% { transform: translate(10px,-5px) scale(1.1); opacity: 1; }
+  66% { transform: translate(-5px,8px) scale(0.95); opacity: 0.7; }
+}
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-80px) translateX(var(--drift)); opacity: 0; }
+}

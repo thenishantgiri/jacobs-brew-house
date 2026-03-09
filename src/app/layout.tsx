@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="bg-[#0A0A0A] text-[#F5F0EB] font-sans antialiased overflow-x-hidden">
+      <body suppressHydrationWarning className="bg-[#0A0A0A] text-[#F5F0EB] font-sans antialiased overflow-x-hidden">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

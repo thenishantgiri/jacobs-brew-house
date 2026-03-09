@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import GalleryCard from "@/components/GalleryCard";
 
 function FadeUp({ children, className = "" }: { children: React.ReactNode; className?: string; delay?: number }) {
   return <div className={className}>{children}</div>;
@@ -113,20 +114,13 @@ export default function GalleryPage() {
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
           {filtered.map((img, i) => (
-            <div
-              key={img.src}
-              className="mb-4 break-inside-avoid"
-              style={{
-                animation: `fadeInUp 0.5s ease ${i * 0.04}s both`,
-              }}
-            >
-              <div onClick={() => openLightbox(i)} className="group relative cursor-pointer overflow-hidden rounded-lg">
-                <Image src={img.src} alt={img.alt} width={600} height={800} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/40">
-                  <span className="text-sm tracking-[0.25em] uppercase font-sans text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">View</span>
-                </div>
-              </div>
-            </div>
+            <GalleryCard
+              key={`${activeTab}-${img.src}`}
+              src={img.src}
+              alt={img.alt}
+              index={i}
+              onClick={() => openLightbox(i)}
+            />
           ))}
         </div>
       </section>

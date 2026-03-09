@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 function FadeUp({ children, className = "" }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -11,9 +10,8 @@ function FadeUp({ children, className = "" }: { children: React.ReactNode; class
 const navigationLinks = [
   { number: "01", label: "Home", href: "/" },
   { number: "02", label: "About", href: "/about" },
-  { number: "03", label: "Menu", href: "/menu" },
-  { number: "04", label: "Gallery", href: "/gallery" },
-  { number: "05", label: "Contact", href: "/contact" },
+  { number: "03", label: "Gallery", href: "/gallery" },
+  { number: "04", label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -49,7 +47,7 @@ export default function Footer() {
           <FadeUp>
             <div className="space-y-6">
               <Link href="/" className="inline-block">
-                <Image src="/images/brand/logo.png" alt="Jacob's Brew House" width={140} height={48} />
+                <img src="/images/brand/logo.png" alt="Jacob's Brew House" width={140} height={48} />
               </Link>
               <p className="font-sans text-sm leading-relaxed text-white/50 max-w-[260px]">
                 A modern European caf&eacute; experience crafted with passion and precision.

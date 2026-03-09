@@ -3,6 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ValuesSection from "@/components/ValuesSection";
+import SpaceShowcase from "@/components/SpaceShowcase";
+import ExperienceSection from "@/components/ExperienceSection";
 
 
 function FadeUp({ children, className = "" }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -10,18 +13,7 @@ function FadeUp({ children, className = "" }: { children: React.ReactNode; class
 }
 
 /* ── Data ── */
-const values = [
-  { number: "01", title: "CRAFT", description: "Every cup is brewed with precision. Every dish is prepared with care. We believe in doing fewer things, but doing them exceptionally." },
-  { number: "02", title: "COMMUNITY", description: "We designed our spaces to bring people together. From swing seats to communal tables, every corner invites connection." },
-  { number: "03", title: "CHARACTER", description: "Our vintage photo booth, industrial pipes, and eclectic d\u00e9cor aren\u2019t just design choices \u2014 they\u2019re conversation starters." },
-];
 
-const experiences = [
-  { title: "Specialty Coffee", description: "Single-origin beans, pour-over precision, and latte art that\u2019s almost too beautiful to drink." },
-  { title: "Artisan Kitchen", description: "Wood-fired pizzas, gourmet plates, and seasonal menus that celebrate fresh, local ingredients." },
-  { title: "Curated Interiors", description: "Every chair, tile, and light fixture tells a story of craftsmanship and intentional design." },
-  { title: "Vibrant Events", description: "Live music evenings, art shows, and community gatherings that keep the energy alive." },
-];
 
 export default function AboutPage() {
   return (
@@ -62,72 +54,13 @@ export default function AboutPage() {
       </section>
 
       {/* 3. VALUES */}
-      <section className="py-24 max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-          {values.map((value, i) => (
-            <FadeUp key={value.number} delay={i * 0.15}>
-              <div className={`py-12 md:px-10 first:md:pl-0 last:md:pr-0 ${i < values.length - 1 ? "border-b md:border-b-0 md:border-r border-white/10" : ""}`}>
-                <span className="block font-serif text-6xl text-white/20 mb-6">{value.number}</span>
-                <h3 className="font-sans text-xs uppercase tracking-[0.25em] text-white mb-4">{value.title}</h3>
-                <p className="font-sans text-sm leading-relaxed text-white/50">{value.description}</p>
-              </div>
-            </FadeUp>
-          ))}
-        </div>
-      </section>
+      <ValuesSection />
 
       {/* 4. SPACE SHOWCASE */}
-      <section className="py-32 max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          <FadeUp>
-            <div className="relative aspect-[4/5] overflow-hidden group">
-              <Image src="/images/interior/swings.jpg" alt="Swing seating area" fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-            </div>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <div className="relative aspect-[4/5] overflow-hidden group">
-              <Image src="/images/interior/outdoor.jpg" alt="Outdoor seating area" fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-            </div>
-          </FadeUp>
-        </div>
-        <FadeUp delay={0.4}>
-          <blockquote className="mt-20 text-center">
-            <p className="font-serif text-3xl md:text-5xl italic leading-[1.2] tracking-tight text-white/80 max-w-3xl mx-auto">
-              &ldquo;We didn&apos;t just build a caf&eacute;.<br />We built a feeling.&rdquo;
-            </p>
-          </blockquote>
-        </FadeUp>
-      </section>
+      <SpaceShowcase />
 
       {/* 5. THE EXPERIENCE */}
-      <section className="py-32 bg-[#0F0F0F]">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="max-w-2xl mb-20">
-            <FadeUp>
-              <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/40 mb-4">What We Offer</p>
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <h2 className="font-serif text-4xl md:text-6xl leading-[1.1] tracking-tight mb-6">The Experience</h2>
-            </FadeUp>
-            <FadeUp delay={0.2}>
-              <p className="text-lg text-white/50 leading-relaxed">
-                What makes Jacob&apos;s Brew House different isn&apos;t one thing &mdash; it&apos;s everything. Every detail, from the aroma that greets you at the door to the last sip of your espresso, is designed to be memorable.
-              </p>
-            </FadeUp>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
-            {experiences.map((item, i) => (
-              <FadeUp key={item.title} delay={i * 0.15}>
-                <div className="group">
-                  <div className="w-12 h-[2px] bg-brand-green mb-6 transition-all duration-500 group-hover:w-20" />
-                  <h3 className="font-sans text-sm uppercase tracking-[0.2em] text-white mb-3">{item.title}</h3>
-                  <p className="font-sans text-sm leading-relaxed text-white/50">{item.description}</p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ExperienceSection />
 
       {/* 6. CTA */}
       <section className="relative py-40 overflow-hidden">

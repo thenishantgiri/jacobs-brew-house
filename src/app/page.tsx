@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import DishesSection from "@/components/DishesSection";
 
 /* Plain wrapper — no animation, just renders children visibly */
 function FadeUp({
@@ -140,10 +141,10 @@ function IntroductionSection() {
           <FadeUp delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link
-                href="/menu"
+                href="/about"
                 className="group inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-white hover:text-brand-green transition-colors duration-300 font-sans"
               >
-                Explore Our Menu
+                Our Story
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
                   &rarr;
                 </span>
@@ -295,66 +296,8 @@ function MarqueeSection() {
 }
 
 /* ══════════════════════════════════════════════
-   5. FEATURED DISHES SECTION
+   5. FEATURED DISHES SECTION — see DishesSection component
    ══════════════════════════════════════════════ */
-const dishes = [
-  { image: "/images/food/food-1.jpg", title: "Artisan Pizzas", num: "01" },
-  { image: "/images/food/food-2.jpg", title: "Gourmet Skewers", num: "02" },
-  { image: "/images/food/food-3.jpg", title: "Fresh Salads & Bowls", num: "03" },
-  { image: "/images/food/food-4.jpg", title: "Specialty Coffee", num: "04" },
-];
-
-function DishesSection() {
-  return (
-    <section className="py-32 px-6 md:px-8">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50 font-sans mb-16">
-          Crafted with Passion
-        </h2>
-      </div>
-
-      <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-8 pb-4 no-scrollbar">
-        {dishes.map((dish) => (
-          <div key={dish.num} className="flex-shrink-0 snap-start">
-            <div className="group w-[75vw] sm:w-[50vw] md:w-[35vw] lg:w-[28vw] transition-transform duration-500 ease-out hover:-translate-y-4">
-              {/* Image card */}
-              <div className="relative aspect-[3/4] overflow-hidden rounded-xl mb-4 transition-all duration-500 ease-out group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_40px_rgba(27,94,59,0.15)] group-hover:rounded-2xl">
-                <Image
-                  src={dish.image}
-                  alt={dish.title}
-                  fill
-                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-125 group-hover:rotate-2"
-                  sizes="(max-width: 640px) 75vw, (max-width: 768px) 50vw, 28vw"
-                />
-                {/* Dark gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent transition-all duration-500 group-hover:from-black/40 group-hover:via-brand-green-dark/10" />
-                {/* Green glow border */}
-                <div className="absolute inset-0 rounded-xl border border-transparent transition-all duration-500 group-hover:border-brand-green/40 group-hover:shadow-[inset_0_0_50px_rgba(27,94,59,0.2)] group-hover:rounded-2xl" />
-                {/* Centered label that appears on hover */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs uppercase tracking-[0.3em] text-white font-sans px-6 py-3 border border-white/0 rounded-full opacity-0 translate-y-6 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-hover:border-white/30 group-hover:backdrop-blur-sm group-hover:bg-white/5">
-                    View Dish
-                  </span>
-                </div>
-              </div>
-              {/* Number — scales up and turns green on hover */}
-              <span className="block font-serif text-8xl leading-none mb-2 transition-all duration-500 text-white/10 group-hover:text-brand-green/30 group-hover:scale-110 group-hover:-translate-x-2 origin-left">
-                {dish.num}
-              </span>
-              {/* Title with underline that expands */}
-              <div className="relative inline-block">
-                <h3 className="font-serif text-xl md:text-2xl text-white transition-colors duration-300 group-hover:text-brand-green-light">
-                  {dish.title}
-                </h3>
-                <div className="h-[2px] bg-brand-green mt-2 w-0 transition-all duration-700 ease-out group-hover:w-full" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /* ══════════════════════════════════════════════
    6. PHILOSOPHY / STORY SECTION
