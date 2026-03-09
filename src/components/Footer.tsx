@@ -80,19 +80,19 @@ export default function Footer() {
               <div className="flex flex-col gap-4">
                 <div className="space-y-1">
                   <p className="font-sans text-[11px] uppercase tracking-[0.15em] text-white/30">Address</p>
-                  <p className="font-sans text-sm text-white/70 leading-relaxed">123 Brew Lane,<br />Coffee District</p>
+                  <p className="font-sans text-sm text-white/70 leading-relaxed">Plot No 7, JLN, Opp. Clarks Amer Hotel,<br />Malviya Nagar, Jaipur, Rajasthan</p>
                 </div>
                 <div className="space-y-1">
                   <p className="font-sans text-[11px] uppercase tracking-[0.15em] text-white/30">Phone</p>
-                  <a href="tel:+919876543210" className="group relative inline-block font-sans text-sm text-white/70 hover:text-brand-green-light transition-colors duration-300">
-                    +91 98765 43210
+                  <a href="tel:+917229966700" className="group relative inline-block font-sans text-sm text-white/70 hover:text-brand-green-light transition-colors duration-300">
+                    +91 7229966700
                     <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-brand-green-light group-hover:w-full transition-all duration-300" />
                   </a>
                 </div>
                 <div className="space-y-1">
                   <p className="font-sans text-[11px] uppercase tracking-[0.15em] text-white/30">Email</p>
-                  <a href="mailto:hello@jacobsbrewhouse.com" className="group relative inline-block font-sans text-sm text-white/70 hover:text-brand-green-light transition-colors duration-300">
-                    hello@jacobsbrewhouse.com
+                  <a href="mailto:info@jacobbrewhouse.com" className="group relative inline-block font-sans text-sm text-white/70 hover:text-brand-green-light transition-colors duration-300">
+                    info@jacobbrewhouse.com
                     <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-brand-green-light group-hover:w-full transition-all duration-300" />
                   </a>
                 </div>

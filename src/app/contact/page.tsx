@@ -54,14 +54,44 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     name: "", email: "", phone: "", subject: "General Inquiry", message: "",
   });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
+
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatus("error");
+      setErrorMessage("Please fill in your name, email, and message.");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      setStatus("success");
+      setForm({ name: "", email: "", phone: "", subject: "General Inquiry", message: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Failed to send message. Please try again.");
+    }
   };
 
   const formFields = [
@@ -102,19 +132,19 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                   </svg>
-                  <span className="text-white/70 font-sans text-sm leading-relaxed">123 Brew Lane, Coffee District, City Center</span>
+                  <span className="text-white/70 font-sans text-sm leading-relaxed">Plot No 7, JLN, Opp. Clarks Amer Hotel,<br />Malviya Nagar, Jaipur, Rajasthan</span>
                 </div>
                 <div className="flex items-start gap-4">
                   <svg className="w-5 h-5 mt-1 shrink-0 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                   </svg>
-                  <span className="text-white/70 font-sans text-sm">+91 98765 43210</span>
+                  <span className="text-white/70 font-sans text-sm">+91 7229966700</span>
                 </div>
                 <div className="flex items-start gap-4">
                   <svg className="w-5 h-5 mt-1 shrink-0 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                   </svg>
-                  <span className="text-white/70 font-sans text-sm">hello@jacobsbrewhouse.com</span>
+                  <span className="text-white/70 font-sans text-sm">info@jacobbrewhouse.com</span>
                 </div>
                 <div className="flex items-start gap-4">
                   <svg className="w-5 h-5 mt-1 shrink-0 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -146,13 +176,14 @@ export default function ContactPage() {
                     name={field.name}
                     value={form[field.name as keyof typeof form]}
                     onChange={handleChange}
-                    className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans"
+                    disabled={status === "sending"}
+                    className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans disabled:opacity-50"
                   />
                 </div>
               ))}
               <div className="flex flex-col gap-2">
                 <label className="text-sm uppercase tracking-wide text-white/50 font-sans">Subject</label>
-                <select name="subject" value={form.subject} onChange={handleChange} className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans appearance-none cursor-pointer">
+                <select name="subject" value={form.subject} onChange={handleChange} disabled={status === "sending"} className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans appearance-none cursor-pointer disabled:opacity-50">
                   {["General Inquiry", "Reservation", "Private Event", "Feedback", "Other"].map((opt) => (
                     <option key={opt} value={opt} className="bg-[#0A0A0A] text-white">{opt}</option>
                   ))}
@@ -160,10 +191,27 @@ export default function ContactPage() {
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-sm uppercase tracking-wide text-white/50 font-sans">Message</label>
-                <textarea name="message" rows={5} value={form.message} onChange={handleChange} className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans resize-none" />
+                <textarea name="message" rows={5} value={form.message} onChange={handleChange} disabled={status === "sending"} className="bg-transparent border-b border-white/20 focus:border-brand-green text-white py-4 outline-none transition-colors duration-300 font-sans resize-none disabled:opacity-50" />
               </div>
-              <button type="submit" className="w-full bg-brand-green text-white py-4 rounded-lg font-sans text-sm uppercase tracking-[0.2em] hover:bg-brand-green/80 transition-colors duration-300 mt-4 cursor-pointer">
-                Send Message
+
+              {status === "success" && (
+                <div className="bg-brand-green/10 border border-brand-green/30 rounded-lg px-5 py-4">
+                  <p className="text-brand-green-light font-sans text-sm">Thank you! Your message has been sent. We&rsquo;ll get back to you soon.</p>
+                </div>
+              )}
+
+              {status === "error" && errorMessage && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-5 py-4">
+                  <p className="text-red-400 font-sans text-sm">{errorMessage}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full bg-brand-green text-white py-4 rounded-lg font-sans text-sm uppercase tracking-[0.2em] hover:bg-brand-green/80 transition-colors duration-300 mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "sending" ? "Sending..." : "Send Message"}
               </button>
             </form>
           </FadeUp>
@@ -183,7 +231,7 @@ export default function ContactPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
             </svg>
             <h3 className="font-serif text-2xl md:text-3xl text-white">Visit us at Jacob&rsquo;s Brew House</h3>
-            <p className="text-white/40 font-sans text-sm tracking-wide">123 Brew Lane, Coffee District, City Center</p>
+            <p className="text-white/40 font-sans text-sm tracking-wide">Plot No 7, JLN, Opp. Clarks Amer Hotel, Malviya Nagar, Jaipur, Rajasthan</p>
           </div>
         </section>
       </FadeUp>
