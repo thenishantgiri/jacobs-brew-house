@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import DishesSection from "@/components/DishesSection";
+
+export const metadata: Metadata = {
+  title: "Jacob's Brew House | Premium Cafe Experience in Jaipur",
+  description:
+    "Experience European-style dining at Jacob's Brew House, Malviya Nagar, Jaipur. Artisan coffee, wood-fired pizzas, craft cocktails, and stunning interiors.",
+  alternates: {
+    canonical: "https://www.jacobbrewhouse.com",
+  },
+};
 
 /* Plain wrapper — no animation, just renders children visibly */
 function FadeUp({
